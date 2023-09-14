@@ -32,7 +32,7 @@ public class RegionRestController {
     }
 
     @GetMapping("/communesByRegions/{regionName}")
-    public ResponseEntity<Set<Kommune>> getCommunesByRegion(@PathVariable String regionName) {
+    public ResponseEntity<Set<String>> getCommunesByRegion(@PathVariable String regionName) {
         return regionService.getCommunesByRegion(regionName);
     }
 }

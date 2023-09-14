@@ -7,8 +7,10 @@ import org.springframework.data.domain.Example;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class RegionService {
@@ -32,10 +34,11 @@ public class RegionService {
         }
     }
 
-    public ResponseEntity<Set<Kommune>> getCommunesByRegion(String regionName) {
+    public ResponseEntity<Set<String>> getCommunesByRegion(String regionName) {
         Region region = regionRepository.findByName(regionName);
+        int[] testArray = new int[10];
         if (region != null) {
-            return ResponseEntity.ok().body(region.getCommunes());
+            return ResponseEntity.ok().body(region.getCommunes().stream().map(Kommune::getName).collect(Collectors.toSet()));
         } else {
             return ResponseEntity.notFound().build();
         }
